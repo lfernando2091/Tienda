@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="fruit">  
-  <select id="testParameters">
+<mapper namespace="login">  
+  <select id="authenticate">
     SELECT
       name,
       category,
@@ -9,7 +9,7 @@
     FROM
       fruits 
     WHERE
-      category = #{category}
-      AND price > ${price}
+      usuario = ${usuario}
+      AND token > ${password}
   </select>
 </mapper>
