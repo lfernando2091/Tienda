@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="login">  
+<mapper namespace="login">
+  <!-- 
+
+CREATE TABLE tienda.usuarios (
+  idusuarios INT NOT NULL AUTO_INCREMENT,
+  nickname VARCHAR(30) NOT NULL,
+  usuario VARCHAR(10) NOT NULL,
+  token VARCHAR(100) NOT NULL,
+  PRIMARY KEY (idusuarios),
+  UNIQUE INDEX nickname_UNIQUE (nickname ASC) VISIBLE,
+  UNIQUE INDEX usuario_UNIQUE (usuario ASC) VISIBLE,
+  UNIQUE INDEX token_UNIQUE (token ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO tienda.usuarios VALUES(null, 'LuisFernando', 'lfernando','');
+
+  -->
+
+
   <select id="authenticate">
     SELECT
-      name,
-      category,
-      price
+      nickname
     FROM
-      fruits 
+      usuarios
     WHERE
       usuario = ${usuario}
       AND token > ${password}
