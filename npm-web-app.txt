@@ -1,0 +1,37 @@
+/*Creando directorio con template para web app*/
+
+express Tienda --view=pug
+
+cd Tienda 
+
+npm install
+
+/*Deploy del proyecto en localhost*/
+
+SET DEBUG=Tienda:* & npm start
+
+--> http://localhost:3000/ 
+
+/*Instalar la paquete de deploy automatico para cambios en los archivos de la app*/
+
+npm install --save-dev nodemon
+
+/*Deploy del proyecto en localhost con devstart*/
+
+SET DEBUG=Tienda:* & npm run devstart
+
+/*Instalar body-parser*/
+
+install body-parser
+
+/*Instalar debug*/
+
+npm install debug
+
+/*Instalar MySql*/
+
+npm install mysql
+
+/*Instalar MyBatis XML Mapper*/
+
+npm install --save mybatis-mapper
