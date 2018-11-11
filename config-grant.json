@@ -1,0 +1,17 @@
+{
+  "defaults": {
+    "protocol": "http",
+    "host": "localhost:8080",
+    "transport": "session"
+  },
+  "facebook": {
+    "key": "[CLIENT_ID]",
+    "secret": "[CLIENT_SECRET]",
+    "callback": "/facebook_callback"
+  },
+  "twitter": {
+    "key": "[CONSUMER_KEY]",
+    "secret": "[CONSUMER_SECRET]",
+    "callback": "/twitter_callback"
+  }
+}

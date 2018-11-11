@@ -5,9 +5,17 @@ var debug = require('debug')('app --> ');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var grant = require('grant-express');
+var MySQLStore = require('express-mysql-session')(session);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+/*Config Options For Grant*/
+var config = require('./config-grant.json');
+
+/*Config Options For MySql Connection*/
+var options = require('./config-db-options.json');
+
+var sessionStore = new MySQLStore(options);
 
 var app = express();
 
@@ -21,15 +29,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// REQUIRED: any session store - see /examples/express-session-stores
+app.use(
+    session(
+        {
+            store: sessionStore,
+            key: 'mitienda',
+            secret: 'grant', 
+            saveUninitialized: true, 
+            resave: true
+        }
+    ));
+// mount grant
+app.use(grant(config))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
 app.use(bodyParser.json())
- 
+
+/*Call to router Controller*/
+require('./lib/routes.js')(app);
+
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')

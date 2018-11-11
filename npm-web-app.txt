@@ -18,7 +18,9 @@ npm install --save-dev nodemon
 
 /*Deploy del proyecto en localhost con devstart*/
 
+/*C:\Users\lfern\OneDrive\Documentos\GitHub\Tienda*/
 SET DEBUG=Tienda:* & npm run devstart
+
 
 /*Instalar body-parser*/
 
@@ -28,10 +30,18 @@ install body-parser
 
 npm install debug
 
-/*Instalar MySql*/
+/*Instalar MySql with express-mysql-session*/
 
-npm install mysql
+npm install express-mysql-session --save
 
 /*Instalar MyBatis XML Mapper*/
 
 npm install --save mybatis-mapper
+
+/*express-session*/
+
+npm install express-session
+
+/*OAuth Middleware for Express*/
+
+npm install grant-express
