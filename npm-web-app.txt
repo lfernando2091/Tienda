@@ -34,6 +34,10 @@ npm install debug
 
 npm install express-mysql-session --save
 
+/*Instalar MySql Middleware*/
+
+npm install express-myconnection
+
 /*Instalar MyBatis XML Mapper*/
 
 npm install --save mybatis-mapper
@@ -45,3 +49,24 @@ npm install express-session
 /*OAuth Middleware for Express*/
 
 npm install grant-express
+
+/*Express Flash for pass messaje between View*/
+
+npm install express-flash
+
+/*Express Validator for*/
+
+npm install express-validator
+
+/*Express UUID creator
+--> kX2OhLUMv6Q2iXu8s-mMuzmraewi1eUY
+--> 7YFtDWmXi-7rdRTIWYere6oHgO_DdOAH
+*/
+
+npm install --save uuid
+
+/*Express Passport Authentication*/
+
+npm install passport passport-local --save
+
+
