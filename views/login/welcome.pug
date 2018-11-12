@@ -1,9 +1,6 @@
-doctype html
-html(lang='en')
-	head
-		title Express authentication example
-	body
-		h1 Welcome 
-		p Navigate to
-			ul
-				li: a(href="/logout") Logout
+extends ../layout
+block content
+	h1 Welcome 
+	p Navigate to
+		ul
+			li: a(href="/logout", class='uk-link-reset') Logout

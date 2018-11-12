@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
-    p Navigate to
-        ul
-            li: a(href="/login") Login
+    p Mi tienda #{title}
+    p Ir a
+        ul(class="uk-list uk-list-divider")
+            li: h3: a(href="/login", class="uk-link-reset") Login

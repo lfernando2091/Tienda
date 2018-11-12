@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
           console.log('The solution is: ', results[0].solution);
     });
     */
-    res.render('index', { title: 'Tomorrowland' });
+    res.render('index', { title: 'Mas Ferreterias' });
 });
 
 module.exports = router;
