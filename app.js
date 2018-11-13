@@ -125,37 +125,37 @@ passport.use(new LocalStrategy(
         password : password
     }
 
-    var User;
-
     // create the connection to database
     MySql.createConnection(options).query(mappers.onQuery('authenticate',param), function (error, results, fields) {
-        if (error) throw error;
-        User = results;
-        console.log(User);
-    });
-
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+        if (error) return done(err);        
+        if (results.length==0)
+          return done(null, false, { message: 'Incorrect username o password.' });        
+        return done(null, results[0]);
     });
   }
 ));
 
 // tell passport how to serialize the user
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.Id);
 });
 
 passport.deserializeUser(function(id, done) {
+  // SQL Parameters
+  var param = {
+        id : id
+  }
+  MySql.createConnection(options).query(mappers.onQuery('findById',param), function (error, results, fields) {
+        if (error) return done(err);        
+        if (results.length==0)
+          return done(null, false, { message: 'Incorrect username o password.' });        
+        return done(null, results[0]);
+  });
+  /*
   User.findById(id, function(err, user) {
     done(err, user);
   });
+  */
 });
 
 app.use(passport.initialize());

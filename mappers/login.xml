@@ -29,6 +29,17 @@ INSERT INTO tienda.usuarios VALUES(null, 'LuisFernando', 'lfernando','');
       usuarios
     WHERE
       usuario = '${usuario}'
-      AND token > '${password}'
+      AND token = '${password}'
+  </select>
+
+  <select id="findById">
+    SELECT
+      idusuarios Id,
+      usuario Usuario,
+      token Token
+    FROM
+      usuarios
+    WHERE
+      idusuarios = ${id}
   </select>
 </mapper>
