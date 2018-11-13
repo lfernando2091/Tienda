@@ -5,6 +5,10 @@ var debug = require('debug')('app --> ');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+/*Call Mappers Controller*/
+var mappers = require('./lib/mappers.js');
+mappers.loadMapper('login');
+mappers.setNameSpace('login');
 /**
  * Express Passport Controller
  */
@@ -105,7 +109,6 @@ app.use(
     ));
 // mount grant
 app.use(grant(config));
-
 /**
  * Express Passport Settings
  */ 
@@ -115,8 +118,21 @@ passport.use(new LocalStrategy(
     passwordField: 'password'
   },
   function(username, password, done) {
-    
 
+    // SQL Parameters
+    var param = {
+        usuario : username,
+        password : password
+    }
+
+    var User;
+
+    // create the connection to database
+    MySql.createConnection(options).query(mappers.onQuery('authenticate',param), function (error, results, fields) {
+        if (error) throw error;
+        User = results;
+        console.log(User);
+    });
 
     User.findOne({ username: username }, function(err, user) {
       if (err) { return done(err); }
@@ -152,7 +168,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 /*Call to router Controller*/
-require('./lib/routes.js')(app);
+require('./lib/routes.js')(app, passport);
 
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')

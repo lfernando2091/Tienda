@@ -1,5 +1,4 @@
 var express = require('express');
-const mybatisMapper = require('mybatis-mapper');
 var router = express.Router();
 
 /*Conecxion a MySql

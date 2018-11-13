@@ -22,11 +22,13 @@ INSERT INTO tienda.usuarios VALUES(null, 'LuisFernando', 'lfernando','');
 
   <select id="authenticate">
     SELECT
-      nickname
+      idusuarios Id,
+      usuario Usuario,
+      token Token
     FROM
       usuarios
     WHERE
-      usuario = ${usuario}
-      AND token > ${password}
+      usuario = '${usuario}'
+      AND token > '${password}'
   </select>
 </mapper>
