@@ -10,6 +10,10 @@ var mappers = require('./lib/mappers.js');
 mappers.loadMapper('login');
 mappers.setNameSpace('login');
 /**
+ * Express bcrypt for sometext
+ */
+const bcrypt = require('bcrypt-nodejs');
+/**
  * Express Passport Controller
  */
 const passport = require('passport');
@@ -112,26 +116,34 @@ app.use(grant(config));
 /**
  * Express Passport Settings
  */ 
+var users;
+
 passport.use(new LocalStrategy(
   {
     usernameField: 'username',
     passwordField: 'password'
   },
   function(username, password, done) {
-
+    // Load hash from your password DB.
+    //bcrypt.compare("bacon", hash, function(err, res) {
+        // res == true
+    //});
     // SQL Parameters
     var param = {
         usuario : username,
-        password : password
-    }
-
+        password : '$2a$10$Z4lMjOGbutYsCE79qrnluun1ibs7fcxen.p7843qdhKS78NZEr/x6'
+    } 
     // create the connection to database
     MySql.createConnection(options).query(mappers.onQuery('authenticate',param), function (error, results, fields) {
-        if (error) return done(err);        
+        if (error) return done(err); 
+        users = results;  
+        console.log(results);     
         if (results.length==0)
-          return done(null, false, { message: 'Incorrect username o password.' });        
-        return done(null, results[0]);
-    });
+          return done(null, false, { message: 'Usuario no registrado.' }); 
+        if(username != results[0].Usuario && !bcrypt.compareSync(password, results[0].Token)) 
+          return done(null, false, { message: 'Incorrect username o password.' }); 
+        return done(null, results[0]);             
+    });    
   }
 ));
 
@@ -140,22 +152,15 @@ passport.serializeUser((user, done) => {
   done(null, user.Id);
 });
 
+
 passport.deserializeUser(function(id, done) {
   // SQL Parameters
-  var param = {
-        id : id
-  }
-  MySql.createConnection(options).query(mappers.onQuery('findById',param), function (error, results, fields) {
-        if (error) return done(err);        
-        if (results.length==0)
-          return done(null, false, { message: 'Incorrect username o password.' });        
-        return done(null, results[0]);
-  });
-  /*
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-  */
+  const user = users[0].Id === id ? users[0] : false; 
+  done(null, user);
+  //User.findById(id, function(err, user) {
+  //  done(err, user);
+  //});
+
 });
 
 app.use(passport.initialize());

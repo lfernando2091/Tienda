@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login">
   <!-- 
+CREATE database tienda;
 
 CREATE TABLE tienda.usuarios (
   idusuarios INT NOT NULL AUTO_INCREMENT,
@@ -15,8 +16,10 @@ CREATE TABLE tienda.usuarios (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO tienda.usuarios VALUES(null, 'LuisFernando', 'lfernando','');
+INSERT INTO tienda.usuarios VALUES(null, 'LuisFernando', 'root','$2a$10$Z4lMjOGbutYsCE79qrnluun1ibs7fcxen.p7843qdhKS78NZEr/x6');
 
+update tienda.usuarios set token = '$2a$10$Z4lMjOGbutYsCE79qrnluun1ibs7fcxen.p7843qdhKS78NZEr/x6' where idusuarios = 1;
+update tienda.usuarios set usuario = 'root' where idusuarios = 1;
   -->
 
 

@@ -69,4 +69,12 @@ npm install --save uuid
 
 npm install passport passport-local --save
 
+/*Express for make POST and GET, for transpace data and recive JSON*/
+
+npm install axios --save
+
+/*Express bcrypt for passwords o sometext*/
+
+npm install bcrypt-nodejs --save
+
 
