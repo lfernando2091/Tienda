@@ -116,7 +116,7 @@ app.use(grant(config));
 /**
  * Express Passport Settings
  */ 
-var users;
+var users = new Array();
 
 passport.use(new LocalStrategy(
   {
@@ -130,17 +130,15 @@ passport.use(new LocalStrategy(
     //});
     // SQL Parameters
     var param = {
-        usuario : username,
-        password : '$2a$10$Z4lMjOGbutYsCE79qrnluun1ibs7fcxen.p7843qdhKS78NZEr/x6'
+        usuario : username
     } 
     // create the connection to database
     MySql.createConnection(options).query(mappers.onQuery('authenticate',param), function (error, results, fields) {
         if (error) return done(err); 
-        users = results;  
-        console.log(results);     
+        users = results;      
         if (results.length==0)
           return done(null, false, { message: 'Usuario no registrado.' }); 
-        if(username != results[0].Usuario && !bcrypt.compareSync(password, results[0].Token)) 
+        if(!bcrypt.compareSync(password, results[0].Token)) 
           return done(null, false, { message: 'Incorrect username o password.' }); 
         return done(null, results[0]);             
     });    
@@ -155,7 +153,11 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(function(id, done) {
   // SQL Parameters
-  const user = users[0].Id === id ? users[0] : false; 
+  var user;
+  if(users.length>0)
+    user = users[0].Id === id ? users[0] : false; 
+  else 
+    user = false;
   done(null, user);
   //User.findById(id, function(err, user) {
   //  done(err, user);

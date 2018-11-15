@@ -1,0 +1,10 @@
+Ctrl + Shift + P
+--> Package Control: Install Package
+--> Material Theme
+--> Package Control: Install Package
+--> Material Theme - Appbar
+
+|Preferences|
+	|Package Settings|
+		|Material Theme|
+			|Activate|
