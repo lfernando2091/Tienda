@@ -1,9 +1,12 @@
 Ctrl + Shift + P
+
+Escribe esto paso a paso:
 --> Package Control: Install Package
 --> Material Theme
 --> Package Control: Install Package
 --> Material Theme - Appbar
 
+Dirigete al menu
 |Preferences|
 	|Package Settings|
 		|Material Theme|
