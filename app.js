@@ -5,6 +5,7 @@ var debug = require('debug')('app --> ');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fs = require('fs');
 /*Call Mappers Controller*/
 var mappers = require('./lib/mappers.js');
 mappers.loadMapper('login');
@@ -72,6 +73,12 @@ var config = require('./config-grant.json');
 
 /*Config Options For MySql Connection*/
 var options = require('./config-db-options.json');
+options.ssl = {
+  ca: fs.readFileSync(__dirname + '/certs/server-ca.pem'),
+  key: fs.readFileSync(__dirname + '/certs/client-key.pem'),
+  cert: fs.readFileSync(__dirname + '/certs/client-cert.pem')
+};
+
 
 var sessionStore = new MySQLStore(options);
 

@@ -1,9 +1,10 @@
 {
-    "host": "127.0.0.1",
+    "host": "35.193.163.215",
     "port": 3306,
     "user": "root",
-    "password": "LuisFernando2091",
+    "password": "LuisFernando2091@",
     "database": "tienda",
+    "ssl":{},
     "schema": {
         "tableName": "sessions",
         "columnNames": {
