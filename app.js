@@ -146,7 +146,7 @@ passport.use(new LocalStrategy(
         if (results.length==0)
           return done(null, false, { message: 'Usuario no registrado.' }); 
         if(!bcrypt.compareSync(password, results[0].Token)) 
-          return done(null, false, { message: 'Incorrect username o password.' }); 
+          return done(null, false, { message: 'Usuario y contraseña incorrectos.' }); 
         return done(null, results[0]);             
     });    
   }

@@ -5,7 +5,7 @@ block content
 		div(class="uk-vertical-align-middle", style="width: 250px;")
 			form(method='post', class='uk-form-stacked')
 				fieldset(class='uk-fieldset')
-					legend(class='uk-legend') Sign-in
+					legend(class='uk-legend') Sign-Up
 					div(class='uk-margin')
 						label(for='username') Username
 					div(class='uk-margin')
@@ -18,9 +18,14 @@ block content
 						div(class='uk-inline')
 							span(class='uk-form-icon uk-form-icon-flip', uk-icon='icon: lock')
 							input(type='password', name='password', placeholder='Contraseña', class='uk-input uk-form-width-medium')
-					input(type='submit', class='uk-button uk-button-primary')
-					ul(class="uk-list uk-link-text")
-						li()
-							a(href="/signup") Signup
+					div(class='uk-margin')
+						label(for='repassword') Re-Password
+					div(class='uk-margin')
+						div(class='uk-inline')
+							span(class='uk-form-icon uk-form-icon-flip', uk-icon='icon: lock')
+							input(type='password', name='repassword', placeholder='Contraseña', class='uk-input uk-form-width-medium')
+					input(type='submit', value="Registrar", class='uk-button uk-button-primary')
 	each message in flash
-		h4(style="color: red;") #{message}
+		div(class="uk-alert-danger" uk-alert)
+			a(class="uk-alert-close" uk-close)
+			p() #{message}
