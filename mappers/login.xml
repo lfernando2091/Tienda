@@ -44,4 +44,11 @@ update tienda.usuarios set usuario = 'root' where idusuarios = 1;
     WHERE
       idusuarios = ${id}
   </select>
+
+  <insert id="insertUser">
+    insert into usuarios (nickname,usuario,token)
+    values (#{nickname},#{usuario},#{token})
+  </insert>
+
+
 </mapper>

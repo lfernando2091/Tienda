@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const fs = require('fs');
 /*Call Mappers Controller*/
-var mappers = require('./lib/mappers.js');
+const mappers = require('./lib/mappers.js');
 mappers.loadMapper('login');
 mappers.setNameSpace('login');
 /**
@@ -84,7 +84,7 @@ var sessionStore = new MySQLStore(options);
 
 var app = express();
 
-var secretKey = 'secret-key-api-change-in-production';
+var secretKey = '{Luis}*[Fernando2091]/@/';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -109,7 +109,7 @@ app.use(
     session(
         {
             store: sessionStore,
-            key: 'mitienda',
+            key: 'My[Protectional*xPW2j}4Pass0/',
             secret: secretKey, 
             genid: (req) => {
               return uuid() // use UUIDs for session IDs
@@ -186,8 +186,8 @@ require('./lib/routes.js')(app, passport);
 
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+  res.write('Sorry that page not exist:\n')
+  res.end(JSON.stringify("Error 404", null, 2))
 })
 
 // catch 404 and forward to error handler
